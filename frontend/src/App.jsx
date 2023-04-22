@@ -13,7 +13,7 @@ function App() {
         <img src={roa} alt="" className="m-auto max-w-xs relative z-10 w-full" />
         <div className="flex flex-col justify-center max-w-xl m-auto relative z-20 pt-5">
           <CountdownTimer >
-            <div className="text-6xl">PREMIÄR</div>
+            <div className="text-6xl skew-z-10">PREMIÄR</div>
           </CountdownTimer>
           {false &&
             <div className="text-white flex justify-center pt-5">

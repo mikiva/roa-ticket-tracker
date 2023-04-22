@@ -38,16 +38,20 @@ export default function CountdownTimer({ children }) {
 
 
     }, [])
-
+    const day = current["days"] === 1 ? "dag" : "dagar";
+    const hour = current["hours"] === 1 ? "timme" : "timmar";
+    const minute = current["minutes"] === 1 ? "minut" : "minuter";
+    const second = current["seconds"] === 1 ? "sekund" : "sekunder";
 
     return (
         <div className="text-white text-center bg-black/50 w-full border-black border-2 py-2 px-5">
             {children}
+
             <div className="flex gap-2 text-white text-lg  flex-nowrap justify-around leading-none">
-                <TimePart time={current["days"]} unit={"dagar"} />
-                <TimePart time={current["hours"]} unit={"timmar"} />
-                <TimePart time={current["minutes"]} unit={"minuter"} />
-                <TimePart time={current["seconds"]} unit={"sekunder"} />
+                <TimePart time={current["days"]} unit={day} />
+                <TimePart time={current["hours"]} unit={hour} />
+                <TimePart time={current["minutes"]} unit={minute} />
+                <TimePart time={current["seconds"]} unit={second} />
 
             </div>
         </div>
@@ -60,7 +64,7 @@ function TimePart({ time, unit }) {
     return (
         <div className="text-center">
             <div className="text-5xl">{time}</div>
-            <div className="text-sm">{unit}</div>
+            <div className="text-sm text-orange-500">{unit}</div>
         </div>
     )
 }
