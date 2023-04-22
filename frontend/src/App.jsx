@@ -8,12 +8,12 @@ function App() {
 
   return (
     <>
-      <div className="bg-black w-screen h-screen relative bg-gradient-to-b from-black from-70%  to-orange-500/10">
+      <div className="bg-black w-screen h-full relative bg-gradient-to-b from-black from-70%  to-orange-500/10">
         <img src={color_splash} alt="" className="max-w-xl -top-20 absolute left-0 right-0 m-[0_auto] z-0 w-full h-auto object-fit" />
         <img src={roa} alt="" className="m-auto max-w-xs relative z-10 w-full" />
         <div className="flex flex-col justify-center max-w-xl m-auto relative z-20 pt-5">
           <CountdownTimer >
-            <div className="text-6xl skew-z-10">PREMIÄR</div>
+            <div className="text-6xl ">PREMIÄR</div>
           </CountdownTimer>
           {false &&
             <div className="text-white flex justify-center pt-5">
