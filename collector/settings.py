@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
 class DBSettings(BaseSettings):
     DB_FILE_LOCATION: str = None
-    WORKER_TIMEOUT: int = 300 #5 minutes
+    WORKER_TIMEOUT: int = 10#300 #5 minutes
     ECHO: bool = False
     REDIS_HOST = "roa_redis"
     HOSTNAME: str = None
