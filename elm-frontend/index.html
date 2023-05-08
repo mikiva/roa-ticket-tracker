@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+
+    <div id="elm-goes-here"></div>
+    <script src='elm.js'></script>
+</body>
+<script>
+    const targetOffset = new Date().getTimezoneOffset() * 60 * 1000
+    const app = Elm.Main.init({
+        flags: {
+            now: new Date().getTime(), target: new Date("2023-10-14T15:00:00").getTime() + targetOffset
+        },
+        node: document.getElementById("elm-goes-here")
+    });
+</script>
+
+</html>
