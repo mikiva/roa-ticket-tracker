@@ -15,7 +15,7 @@ def fetch_and_update():
     global sold
     database = get_database()
     collection = database["tickets"]
-
+    settings = DB
     sold += choice(added)
 
     tstmp = datetime.utcnow()
