@@ -19,7 +19,8 @@ class Settings(BaseSettings):
         189750
     ]
 
-    NORTIC_API_HOSTNAME: str = "https://74xd3rns6k.execute-api.eu-north-1.amazonaws.com"
+    #NORTIC_API_HOSTNAME: str = "https://74xd3rns6k.execute-api.eu-north-1.amazonaws.com"
+    NORTIC_API_HOSTNAME: str = "https://www.nortic.se"
     NORTIC_API_KEY: Optional[str] = None
     VERSION: Optional[str] = "prod"
 
@@ -29,7 +30,7 @@ class Settings(BaseSettings):
 
 class DBSettings(BaseSettings):
     DB_FILE_LOCATION: str = None
-    WORKER_TIMEOUT: int = 10  # 300 #5 minutes
+    WORKER_TIMEOUT: int = 300 #5 minutes
     ECHO: bool = False
     REDIS_HOST = "roa_redis"
     HOSTNAME: str = None
