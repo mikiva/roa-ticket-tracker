@@ -23,9 +23,19 @@ class Settings(BaseSettings):
     NORTIC_API_HOSTNAME: str = "https://www.nortic.se"
     NORTIC_API_KEY: Optional[str] = None
     VERSION: Optional[str] = "prod"
+    WORKER_TIMEOUT: int = 300 #5 minutes
 
     class Config:
         env_prefix = "ROA_"
+
+class MongoSettings(BaseSettings):
+    HOST: str = "localhost"
+    USER: str = "roa"
+    PASSWORD: str = "roa"
+    PORT: str = "27017"
+    
+    class Config:
+        env_prefix = "ROA_DB_"
 
 
 class DBSettings(BaseSettings):
@@ -49,4 +59,5 @@ class InfluxDBSettings(BaseSettings):
 
 
 db_settings = DBSettings()
+mongo_settings = MongoSettings()
 settings = Settings()

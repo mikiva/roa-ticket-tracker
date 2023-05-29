@@ -1,0 +1,6 @@
+0 * * * * /app/.venv/bin/python /app/main.py
+10 * * * * /app/.venv/bin/python /app/main.py
+20 * * * * /app/.venv/bin/python /app/main.py
+30 * * * * /app/.venv/bin/python /app/main.py
+40 * * * * /app/.venv/bin/python /app/main.py
+50 * * * * /app/.venv/bin/python /app/main.py

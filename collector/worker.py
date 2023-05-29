@@ -1,15 +1,17 @@
 from settings import settings
 from datetime import datetime
 from db import get_database
-
+from logging import getLogger
 from requests import get
 
+log = getLogger(__name__)
 
 def fetch_sold_tickets():
     host = settings.NORTIC_API_HOSTNAME
     shows = settings.SHOWS
     org = settings.ORGANIZER
     key = settings.NORTIC_API_KEY
+    log.info(f"FETCH SOLD TICKETS")
 
     base_url = f"{host}/api/json/organizer/{org}/show"
 
@@ -26,6 +28,7 @@ def fetch_sold_tickets():
 def update_database(db, shows):
     tstmp = datetime.utcnow()
     entries = []
+    log.info(f"UPDATE DATABASE")
 
     for show, sold in shows:
         entry = {
@@ -36,7 +39,6 @@ def update_database(db, shows):
             "sold": sold
         }
         entries.append(entry)
-        print(entry)
 
     db.insert_many(entries)
 
@@ -47,16 +49,3 @@ def fetch_and_update():
 
     sold = fetch_sold_tickets()
     update_database(collection, sold)
-
-    # settings = DB
-
-# entry = {
-#     "metadata": {
-#         "show_id": "123",
-#     },
-#     "timestamp": tstmp,
-#     "sold": sold
-# }
-# collection.insert_one(entry)
-#    db = client.get_list_database()
-#    print(db)

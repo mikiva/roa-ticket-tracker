@@ -1,10 +1,7 @@
 FROM python:3.10.11-alpine as py-builder
 
 WORKDIR /app
-USER root
-#RUN apt install curl -y
 RUN apk --no-cache add curl
-
 RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python3 -
 COPY . /app
 ENV PATH=/opt/poetry/bin:$PATH
@@ -14,8 +11,5 @@ FROM python:3.10.11-alpine
 
 COPY --from=py-builder /app /app
 
-#RUN echo "1001" >> /etc/cron.allow
-
-#USER 1001
 WORKDIR /app
-CMD /app/.venv/bin/python /app/main.py
+CMD /app/.venv/bin/python /app/serve.py

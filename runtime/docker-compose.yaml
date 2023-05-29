@@ -1,0 +1,40 @@
+version: "3.4"
+services:
+  roa_collector:
+      container_name: roa_collector
+      image: roa-collector
+      restart: always
+      environment:
+        - ROA_DB_HOST=roa_db
+        - ROA_WORKER_TIMEOUT=10
+      links:
+        - roa_db
+      volumes:
+        - ./crontab:/crontab/crontab
+        #- ./crontab:/crontab-config
+        #- ./collector.sh:/collect/collector.sh:ro
+      command: /app/collector.sh
+      #tty: true
+#      healthcheck:
+#        test: ["curl", "-f" , "roa_db:27017"]
+#        interval: 15s
+#        timeout: 10s
+#        retries: 5
+  roa_db:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    container_name: roa_db
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=roa
+      - MONGO_INITDB_ROOT_PASSWORD=roa
+      - MONGO_INITDB_DATABASE=roa
+
+    restart: always
+
+#networks:
+#  roa:
+#    external: true
+#    name: roa

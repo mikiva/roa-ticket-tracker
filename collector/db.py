@@ -1,9 +1,10 @@
 from pymongo import MongoClient
+from settings import mongo_settings
 
-hostname = "localhost"
-port = "27017"
-user = "roa"
-pw = "roa"
+hostname = mongo_settings.HOST
+port = mongo_settings.PORT
+user = mongo_settings.USER
+pw = mongo_settings.PASSWORD
 
 
 # TODO: Consider time series
