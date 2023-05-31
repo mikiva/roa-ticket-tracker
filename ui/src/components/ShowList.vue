@@ -3,7 +3,7 @@
         <show-list-item :show="{ startDate: 'Föreställning', 'sold': 'Sålda', 'today': 'Idag' }"
             class="text-xl font-bold" />
 
-        <show-list-item :show="show" v-for="show in event.shows" />
+        <show-list-item :show="show" v-for="show in event.shows" class="" />
         <show-list-item :show="event.total" class="text-xl font-bold mt-2" />
     </div>
 </template>
