@@ -4,7 +4,7 @@
             <div className="text-4xl ">PREMIÄR 14 OKTOBER</div>
             <div class="flex gap-2 text-white text-lg  flex-nowrap justify-around leading-none">
                 <div class="text-center" v-for="part in timeParts">
-                    <div class="text-5xl">{{ part[0] }}</div>
+                    <div class="text-4xl">{{ part[0] }}</div>
                     <div class="text-sm text-orange-500">{{ part[1] }}</div>
                 </div>
             </div>

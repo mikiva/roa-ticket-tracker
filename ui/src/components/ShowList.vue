@@ -1,37 +1,50 @@
 <template>
-    <div class="m-auto max-w-xl border-4 border-black bg-black/80 p-4 rounded-md z-10 relative">
-        <show-list-item :show="{ startDate: 'Föreställning', 'sold': 'Sålda', 'today': 'Idag' }"
-            class="text-xl font-bold" />
+  <div class="m-auto max-w-xl border-4 border-black bg-black/80 p-4 rounded-md z-10 relative">
+    <show-list-item :show="{ startDate: 'Föreställning', 'sold': 'Sålda', 'today': 'Idag' }"
+                    class="font-bold"/>
 
-        <show-list-item :show="show" v-for="show in event.shows" class="" />
-        <show-list-item :show="event.total" class="text-xl font-bold mt-2" />
-    </div>
+    <template v-if="loading">
+      <div class="flex items-center gap-4">
+
+     <load-spinner></load-spinner>
+      Hämtar...
+      </div>
+    </template>
+    <template v-else>
+      <show-list-item :show="show" v-for="show in event.shows"/>
+      <show-list-item :show="event.total" class="text-xl font-bold mt-2"/>
+    </template>
+  </div>
 </template>
 
 <script setup>
 import ShowListItem from './ShowListItem.vue';
-import { reactive, onMounted, computed } from 'vue';
-//const url = "https://www.nortic.se/api/json/event/47696"
+import {ref, reactive, onMounted, computed} from 'vue';
+import LoadSpinner from "./LoadSpinner.vue";
 const url = "/api/shows/sold/today"
 
-const event = reactive({ shows: [], total: { startDate: "", sold: 0, today: 0 } })
+const loading = ref(false);
+const event = reactive({shows: [], total: {startDate: "TOTAL", sold: 0, today: 0}})
 
 
 onMounted(async () => {
-    const res = await fetch(url)
-    const result = await res.json();
-    event.shows = result;
+  loading.value = true;
+  const res = await fetch(url)
+  const result = await res.json();
+  event.shows = result;
 
-    let sold = 0;
-    let today = 0;
+  let sold = 0;
+  let today = 0;
 
-    event.shows.forEach(show => {
-        sold += show.sold;
-        today += show.today;
-    })
-    event.total.startDate = "TOTAL";
-    event.total.sold = sold;
-    event.total.today = today;
+  event.shows.forEach(show => {
+    sold += show.sold;
+    today += show.today;
+  })
+  event.total.startDate = "TOTAL";
+  event.total.sold = sold;
+  event.total.today = today;
+
+  loading.value = false;
 })
 
 

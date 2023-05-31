@@ -57,25 +57,25 @@ class TicketService:
                 "current": last,
                 "today": total,
             }
-
         return dict(shows_total)
 
     def get_latest_sold(self):
         pipeline = [
             {
                 "$group": {
-                    "_id": {"show": "$metadata.show_id", "sold": "$sold"},
-                    "maxT":
-                        {
-                            "$max": "$timestamp"
-                        }
+                    "_id": {"show_id": "$metadata.show_id"},
+                    "time": {"$last": "$timestamp"},
+                    "sold": {"$last": "$sold"}
                 }
             },
             {
+                "$sort": {"metadata.show_id": 1}
+            },
+            {
                 "$project": {
-                    "sold": "$_id.sold",
-                    "show": "$_id.show",
-                    "maxT": "$maxT"
+                    "show": "$_id.show_id",
+                    "sold": "$sold",
+                    "time": "$time"
                 }
             }
         ]
@@ -85,7 +85,7 @@ class TicketService:
         for show in result:
             sold = show["sold"]
             show_id = show["show"]
-            timestamp = show["maxT"].isoformat()
+            timestamp = show["time"].isoformat()
             last_sold.append(dict(sold=sold, show_id=show_id, timestamp=timestamp))
         last_sold.sort(key=lambda k: k.get("show_id"))
         return last_sold
