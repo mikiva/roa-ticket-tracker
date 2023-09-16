@@ -2,3 +2,7 @@ __pycache__
 elm-stuff
 .idea
 .vscode
+
+mongo-init.js
+
+mongo-data
