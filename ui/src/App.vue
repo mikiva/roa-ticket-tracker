@@ -22,7 +22,7 @@ const view = ref("main")
                 <button class="px-10  border-black rounded" @click="view = 'main'"
                     v-show="view !== 'main'">Tillbaka</button>
                 <button class="px-10 border-black rounded" @click="view = 'history'" v-show="view !== 'history'">Visa
-                    försälningshistorik</button>
+                    försäljningshistorik</button>
             </div>
             <show-list class="w-full" v-show="view === 'main'" />
             <history-graph class="w-full overflow-hidden" v-show="view === 'history'"></history-graph>
