@@ -1,0 +1,24 @@
+{
+  "short_name": "RoA Tickets",
+  "name": "Rock of Ages Ticket Tracker",
+  "description": "Keep up with the tickets sales for the upcoming musical",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon.svg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "favicon.svg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone"
+}

@@ -2,30 +2,32 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" href="/favicon.ico">
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rock of Ages</title>
-  <meta name="description" content="Scenknuten">
-  <!-- Facebook Meta Tags -->
-  <meta property="og:url" content="https://roa.miiv.se">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Rock of Tickets">
-  <meta property="og:description" content="Följ biljettförsäljningen av Rock of Ages">
-  <meta property="og:image" content="https://roa.miiv.se/roa_preview.png">
-  <meta property="og:image:alt" content="Rock of Ages biljettförsäljningen">
+    <link rel="manifest" href="/manifest.json?v=3"/>
+    <meta name="theme-color" content="#ff7142">
 
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="roa.miiv.se">
-  <meta property="twitter:url" content="https://roa.miiv.se">
-  <meta name="twitter:title" content="Rock of Tickets">
-  <meta name="twitter:description" content="Följ biljettförsäljningen av Rock of Ages">
-  <meta name="twitter:image" content="https://roa.miiv.se/roa_preview.png">
-  <meta property="twitter:image:alt" content="Rock of Ages biljettförsäljningen">
 
+    <title>Rock of Ages</title>
+    <meta name="description" content="Scenknuten">
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://roa.miiv.se">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rock of Tickets">
+    <meta property="og:description" content="Följ biljettförsäljningen av Rock of Ages">
+    <meta property="og:image" content="https://roa.miiv.se/roa_preview.png">
+    <meta property="og:image:alt" content="Rock of Ages biljettförsäljningen">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="roa.miiv.se">
+    <meta property="twitter:url" content="https://roa.miiv.se">
+    <meta name="twitter:title" content="Rock of Tickets">
+    <meta name="twitter:description" content="Följ biljettförsäljningen av Rock of Ages">
+    <meta name="twitter:image" content="https://roa.miiv.se/roa_preview.png">
+    <meta property="twitter:image:alt" content="Rock of Ages biljettförsäljningen">
 
 
 </head>
@@ -33,15 +35,19 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQ8NCNLYG4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
   gtag('js', new Date());
 
   gtag('config', 'G-QQ8NCNLYG4');
 </script>
 
 <body>
-  <div id="app" class="h-full w-full"></div>
-  <script type="module" src="/src/main.js"></script>
+<div id="app" class="h-full w-full"></div>
+<script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
