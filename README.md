@@ -8,9 +8,8 @@ Track the sales of tickets for Scenknutens upcoming musical in Eskilstuna. Power
 ### Collector
 * Python
 * MongoDB
-* Redis
 
-
+UI
 ### Frontend
 * Javascropt
 

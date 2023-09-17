@@ -1,19 +1,19 @@
 <template>
-    <div class="flex">
-        <div class="flex-[2]">{{ startDate }}</div>
-        <div class="flex-1">{{ show.sold }}</div>
-        <div class="flex-1 text-right">{{ show.today }}</div>
-    </div>
+  <div class="flex" :title="show.id">
+    <div class="flex-[2]">{{ startDate }}</div>
+    <div class="flex-1">{{ show.sold }}</div>
+    <div class="flex-1 text-right">{{ show.today }}</div>
+  </div>
 </template>
 
 <script setup>
-import {computed} from "vue";
+import { computed } from "vue";
 
 const props = defineProps(["show"])
 
 const { show } = props;
 
-const months= {
+const months = {
   10: "oktober",
   11: "november",
   12: "decemer"

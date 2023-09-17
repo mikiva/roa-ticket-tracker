@@ -14,6 +14,11 @@ async def get_shows(request: Request, ticket_service=Depends(ticket_service_prov
     latest = ticket_service.get_latest_sold()
     return JSONResponse(latest)
 
+@app.get("/api/shows/sold/history")
+async def get_every_day_sold(request: Request, accept: Annotated[str, Header()],
+                    ticket_service=Depends(ticket_service_provider)):
+    today = ticket_service.get_daily_sold()
+    return JSONResponse(today)
 
 @app.get("/api/shows/sold/today")
 async def get_shows(request: Request, accept: Annotated[str, Header()],
