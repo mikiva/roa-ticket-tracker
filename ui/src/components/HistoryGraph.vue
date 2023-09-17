@@ -34,9 +34,9 @@ onMounted(async () => {
   const result = await res.json();
   event.sold = result;
 
-  for (let i = 1; i < result.length; i++) {
+  for (let i = 0; i < result.length-1; i++) {
     const current = event.sold[i]
-    const prev = event.sold[i - 1]
+    const prev = event.sold[i + 1]
     current["inc"] = current.total - prev.total
   }
 
