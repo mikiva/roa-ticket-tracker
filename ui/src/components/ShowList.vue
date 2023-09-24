@@ -19,13 +19,12 @@
 
 <script setup>
 import ShowListItem from './ShowListItem.vue';
-import { ref, reactive, onMounted, computed } from 'vue';
+import {ref, reactive, onMounted, computed, inject} from 'vue';
 import LoadSpinner from "./LoadSpinner.vue";
 const url = "/api/shows/sold/today"
 
 const loading = ref(false);
 const event = reactive({ shows: [], total: { startDate: "TOTAL", sold: 0, today: 0 } })
-
 
 onMounted(async () => {
   loading.value = true;

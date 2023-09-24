@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col justify-center max-w-xl m-auto relative z-20 pt-5">
         <div class="text-white text-center bg-black/75 w-full border-black border-2 py-2 px-5">
-            <div className="text-4xl ">PREMIÄR 14 OKTOBER</div>
+            <div className="text-4xl uppercase">{{note}}</div>
             <div class="flex gap-2 text-white text-lg  flex-nowrap justify-around leading-none">
                 <div class="text-center" v-for="part in timeParts">
                     <div class="text-4xl">{{ part[0] }}</div>
@@ -14,10 +14,12 @@
 </template>
 
 <script setup>
-import { computed, reactive, onBeforeUnmount, onBeforeMount } from "vue";
+import {computed, reactive, onBeforeUnmount, onBeforeMount, inject, ref} from "vue";
 
 let countInterval = null;
-const targetDate = new Date("2023-10-14T15:00:00").getTime()
+
+const todayIs = inject("TODAY")
+const [targetDate, note] = inject("NEXT_SHOW")
 
 const current = reactive({ count: getCount() })
 
@@ -30,12 +32,17 @@ const timeParts = computed(() => {
         minutes,
         seconds
     } = count
-    const day = days === 1 ? "dag" : "dagar";
-    const hour = hours === 1 ? "timme" : "timmar";
-    const minute = minutes === 1 ? "minut" : "minuter";
-    const second = seconds === 1 ? "sekund" : "sekunder";
+    const DAY = days === 1 ? "dag" : "dagar";
+    const HOUR = hours === 1 ? "timme" : "timmar";
+    const MINUTE = minutes === 1 ? "minut" : "minuter";
+    const SECOND = seconds === 1 ? "sekund" : "sekunder";
 
-    return [[days, day], [hours, hour], [minutes, minute], [seconds, second]]
+    return [
+      [String(days).padStart(2, "0"), DAY],
+      [String(hours).padStart(2, "0"), HOUR],
+      [String(minutes).padStart(2, "0"), MINUTE],
+      [String(seconds).padStart(2, "0"), SECOND]
+  ]
 
 })
 
@@ -52,9 +59,8 @@ onBeforeUnmount(() => {
 
 
 function getCount() {
-    const now = new Date().getTime()
-    const difference = (targetDate - now) / 1000
-
+    const today = new Date().getTime();
+    const difference = (targetDate - today) / 1000
     let days = Math.floor(difference / (60 * 60 * 24));
     let hours = Math.floor((difference % (60 * 60 * 24)) / (60 * 60));
     let minutes = Math.floor((difference % (60 * 60)) / 60);

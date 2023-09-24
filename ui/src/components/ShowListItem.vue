@@ -1,23 +1,37 @@
 <template>
-  <div class="flex" :title="show.id">
-    <div class="flex-[2]">{{ startDate }}</div>
+  <div class="flex" :title="show.id" :class="{'opacity-[0.5]': isPlayed}">
+    <div class="basis-[50%]">{{ startDate }}</div>
     <div class="flex-1">{{ show.sold }}</div>
-    <div class="flex-1 text-right">{{ show.today }}</div>
+    <div class="flex-[4] text-right">{{ show.today }}</div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import {computed, inject} from "vue";
 
-const props = defineProps(["show"])
+const props = defineProps(["show", "isHeader"])
 
 const { show } = props;
+const todayIs = inject("TODAY")
 
 const months = {
   10: "oktober",
   11: "november",
   12: "decemer"
 }
+
+const isPlayed = computed(() => {
+  const reg = /^(\d{4})-(\d{2})-(\d{2}).*/
+  if (!show.startDate.match(reg)) return;
+  const start = show.startDate;
+  const startDate = new Date(start).getTime();
+
+  return startDate <= todayIs
+
+
+})
+
+
 
 const startDate = computed(() => {
   const reg = /^(\d{4})-(\d{2})-(\d{2}).*/
@@ -31,4 +45,7 @@ const startDate = computed(() => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
