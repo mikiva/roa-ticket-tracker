@@ -2,7 +2,7 @@ import datetime
 from collections import defaultdict
 
 from pymongo import MongoClient
-
+from compare import sold as compare_sold
 
 class TicketService:
     def __init__(self, db: MongoClient):
@@ -92,8 +92,6 @@ class TicketService:
         return last_sold
 
     def get_daily_sold(self):
-        date = datetime.datetime(year=2023, month=9, day=10)
-        upper_date = date + datetime.timedelta(days=2)
         pipeline = [
             {
                 "$addFields": {
@@ -137,5 +135,15 @@ class TicketService:
         for show in result:
             sold = show["sold"]
             date = show["_id"]
-            last_sold.append(dict(total=sold, date=date))
+            obj = dict(total=sold, date=date)
+            try:
+                for comp in compare_sold:
+                    compare_date = comp["date"][5:]
+                    if date[5:] == compare_date:
+                        obj["lastYear"] = comp["sold"]
+            except:
+                ...
+
+            last_sold.append(obj)
+
         return last_sold
