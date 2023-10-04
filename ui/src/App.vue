@@ -9,8 +9,31 @@ import splash from "./assets/roa_color_splash.png"
 const todayIs = ref(new Date());
 
 const targetDate = ref([new Date().getTime(), "note"]);
+const showsLoading = ref(false)
+const showsSold = ref([]);
+const historyLoading = ref(false)
+const historySold = ref([]);
 
 
+provide("SHOWS", [showsSold, showsLoading])
+provide("HISTORY", [historySold, historyLoading])
+onMounted(() => {
+  showsLoading.value = true
+  historyLoading.value = true
+  fetch("/api/shows/sold/today").then(res => res.json()).then(result => {
+    showsSold.value = result
+  }).finally(() => {
+    showsLoading.value = false
+  })
+  fetch("/api/shows/sold/history").then(res => res.json()).then(result => {
+    historySold.value = result
+  }).finally(() => {
+
+    historyLoading.value = false
+  })
+
+
+})
 
 
 onBeforeMount(() => {
@@ -36,11 +59,12 @@ const shows = {
  * @param days how many days to progress
  * @private
  */
-function _moveToday(days=0) {
+function _moveToday(days = 0) {
   const d = todayIs.value.getDate() + days
   todayIs.value.setDate(d)
 
 }
+
 function getNextShowTime() {
   let current;
   for (const [date, v] of Object.entries(shows)) {
@@ -70,7 +94,7 @@ const view = ref("main")
                 v-show="view !== 'main'">Tillbaka
         </button>
         <button class="px-10 border-black rounded" @click="view = 'history'" v-show="view !== 'history'">Visa
-          försäljningshistorik
+          försäljning över tid
         </button>
       </div>
       <show-list class="w-full" v-show="view === 'main'"/>

@@ -11,8 +11,8 @@
       </div>
     </template>
     <template v-else>
-      <show-list-item :show="show" v-for="show in event.shows" />
-      <show-list-item :show="event.total" class="text-xl font-bold mt-2" />
+      <show-list-item :show="show" v-for="show in eventSold.shows" />
+      <show-list-item :show="eventSold.total" class="text-xl font-bold mt-2" />
     </template>
   </div>
 </template>
@@ -21,16 +21,14 @@
 import ShowListItem from './ShowListItem.vue';
 import {ref, reactive, onMounted, computed, inject} from 'vue';
 import LoadSpinner from "./LoadSpinner.vue";
-const url = "/api/shows/sold/today"
 
-const loading = ref(false);
 const event = reactive({ shows: [], total: { startDate: "TOTAL", sold: 0, today: 0 } })
 
-onMounted(async () => {
-  loading.value = true;
-  const res = await fetch(url)
-  const result = await res.json();
-  event.shows = result;
+const [result, loading] = inject("SHOWS", [[], false])
+
+const eventSold = computed(() => {
+
+  event.shows = result.value;
 
   let sold = 0;
   let today = 0;
@@ -43,8 +41,10 @@ onMounted(async () => {
   event.total.sold = sold;
   event.total.today = today;
 
-  loading.value = false;
+
+  return event
 })
+
 
 
 </script>
