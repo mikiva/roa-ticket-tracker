@@ -18,7 +18,7 @@ const historyLoading = ref(false)
 const historySold = ref([]);
 const externalArticlesLoading = ref(false)
 const externalArticles = ref([])
-const [MAIN, HISTORY, ARTICLES] = ["#main", "#history", "#articles"]
+const [MAIN, HISTORY, ARTICLES] = ["", "#history", "#articles"]
 
 const view = ref(MAIN)
 
