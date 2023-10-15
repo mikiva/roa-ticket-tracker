@@ -7,6 +7,7 @@ import roa from "../assets/roa.png"
 import splash from "../assets/roa_color_splash.png"
 import ExternalMedia from "@/components/ExternalMedia.vue";
 import TabButton from "@/components/TabButton.vue";
+import {useRoute} from "vue-router";
 
 const todayIs = ref(new Date());
 
@@ -17,12 +18,18 @@ const historyLoading = ref(false)
 const historySold = ref([]);
 const externalArticlesLoading = ref(false)
 const externalArticles = ref([])
+const [MAIN, HISTORY, ARTICLES] = ["#main", "#history", "#articles"]
 
+const view = ref(MAIN)
 
+const route = useRoute()
 provide("SHOWS", [showsSold, showsLoading])
 provide("HISTORY", [historySold, historyLoading])
 provide("EXTERNAL_ARTICLES", [externalArticles, externalArticlesLoading])
 onMounted(() => {
+  if([MAIN, HISTORY, ARTICLES].includes(route.hash)) {
+    view.value = route.hash;
+  }
   showsLoading.value = true
   historyLoading.value = true
   externalArticlesLoading.value = true;
@@ -43,9 +50,12 @@ onMounted(() => {
     externalArticlesLoading.value = false;
   })
 
-
 })
 
+function setView(v) {
+  window.location.hash = v
+  view.value = v
+}
 
 onBeforeMount(() => {
 
@@ -88,10 +98,8 @@ function getNextShowTime() {
   return current
 }
 
-const [MAIN, HISTORY, EXTERNAL] = ["mail", "history", "external"]
 
 
-const view = ref(MAIN)
 </script>
 
 <template>
@@ -103,14 +111,14 @@ const view = ref(MAIN)
     <div class="flex flex-col gap-7 ">
       <countdown-timer class="w-full" :key="targetDate"/>
       <div class="flex m-auto  my-[-15px] z-10 md:gap-3 gap-1 flex-wrap">
-        <tab-button :active="view ===MAIN" @click="view = MAIN">Idag</tab-button>
-        <tab-button :active="view ===HISTORY" @click="view = HISTORY">Historik</tab-button>
-        <tab-button :active="view ===EXTERNAL" @click="view = EXTERNAL">Artiklar</tab-button>
+        <tab-button :active="view ===MAIN" @click="setView(MAIN)">Idag</tab-button>
+        <tab-button :active="view ===HISTORY" @click="setView(HISTORY)">Historik</tab-button>
+        <tab-button :active="view ===ARTICLES" @click="setView(ARTICLES)">Artiklar</tab-button>
 
       </div>
       <show-list class="w-full" v-show="view === MAIN"/>
       <history-graph class="w-full overflow-hidden" v-show="view === HISTORY"></history-graph>
-      <external-media v-show="view===EXTERNAL"></external-media>
+      <external-media v-show="view===ARTICLES"></external-media>
 
     </div>
 

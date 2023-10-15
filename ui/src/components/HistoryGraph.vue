@@ -1,6 +1,6 @@
 <template>
   <div class="m-auto max-w-xl border-4 border-black bg-black/80 p-4 rounded-md z-10 relative">
-    <h2 class="text-lg font-bold flex justify-between">
+    <h2 class="text-xl font-bold flex justify-between">
       <span>Historik</span>
       <button @click="showComparison = !showComparison">
         <div  class="px-1 flex gap-0.5 border rounded text-white text-sm items-center" :class="{'!text-black !bg-white': showComparison}">

@@ -19,5 +19,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes
 });
+
+router.beforeEach((to, from, next) => {
+  try {
+    document.title = to.params?.id || "Rock of Ages"
+  } finally {
+    next();
+  }
+})
+
 export default router;
 

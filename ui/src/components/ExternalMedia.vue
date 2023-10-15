@@ -1,7 +1,7 @@
 <template>
   <Panel>
-    <h2 class="text-lg font-bold flex justify-between">
-      <span>Nyhetsartiklar</span>
+    <h2 class="text-xl font-bold flex justify-between">
+      <span>Artiklar</span>
     </h2>
     <template v-if="loading">
       <div class="flex items-center gap-4">
@@ -14,11 +14,10 @@
 
       <div v-for="(art, idx) in articles" :key="art.title"
            class="flex-col flex relative border rounded border-slate-100/50 mb-2 p-2 ">
-        <router-link :to="{name: 'ExternalView', params: {id: art.id}}" target="_blank" class="flex">
+        <router-link :to="{name: 'ExternalView', params: {id: art.id}}" class="flex font-bold hover:underline">
           <div class="flex-[3]">
             {{ art.title }}
           </div>
-          <ExtIcon class="w-6 h-6"></ExtIcon>
         </router-link>
         <i class="text-sm opacity-70">{{ art.publisher }}</i>
         <i class="text-sm opacity-70">{{ art.date }}</i>
