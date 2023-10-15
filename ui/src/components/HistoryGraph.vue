@@ -1,9 +1,13 @@
 <template>
   <div class="m-auto max-w-xl border-4 border-black bg-black/80 p-4 rounded-md z-10 relative">
     <h2 class="text-lg font-bold flex justify-between">
-      <span>Försäljning över tid</span>
+      <span>Historik</span>
       <button @click="showComparison = !showComparison">
-        <Scale class="border rounded text-white w-8 h-8" :class="{'!text-black !bg-white': showComparison}"/>
+        <div  class="px-1 flex gap-0.5 border rounded text-white text-sm items-center" :class="{'!text-black !bg-white': showComparison}">
+
+          Jämför
+        <Scale class=" w-6 h-6" :class="{'!text-black !bg-white': showComparison}"></Scale>
+        </div>
       </button>
     </h2>
     <template v-if="loading">
