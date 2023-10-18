@@ -12,9 +12,9 @@ export default defineConfig({
   server: {
     port: 8000,
     proxy: {
-      "^/api": "https://roa.miiv.se",
+      //"^/api": "https://roa.miiv.se",
+      "^/api": "http://localhost:8080",
       "^/ext/": "https://roa.miiv.se"
-      //"^/api": "http://localhost:8080"
     }
   }
 })

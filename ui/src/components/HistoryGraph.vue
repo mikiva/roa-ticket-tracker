@@ -5,7 +5,7 @@
       <button @click="showComparison = !showComparison">
         <div  class="px-1 flex gap-0.5 border rounded text-white text-sm items-center" :class="{'!text-black !bg-white': showComparison}">
 
-          Jämför
+          Jämför 2022&nbsp;
         <Scale class=" w-6 h-6" :class="{'!text-black !bg-white': showComparison}"></Scale>
         </div>
       </button>

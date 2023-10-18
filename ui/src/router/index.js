@@ -12,7 +12,7 @@ const routes = [
     component: () => import("@/views/ExternalView.vue"),
     path: "/e/:id",
 
-  }
+  },
 ]
 
 const router = createRouter({

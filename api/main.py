@@ -27,6 +27,7 @@ async def get_shows(request: Request, accept: Annotated[str, Header()],
     shows = nortic_service.get_all_shows_info()
     today = ticket_service.get_today_sold()
 
+
     for show in shows:
         sid = show.get("id")
         show["sold"] = today[sid]["current"]
