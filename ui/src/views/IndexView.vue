@@ -1,5 +1,5 @@
 <script setup>
-import {ref, provide, onBeforeMount, onMounted} from "vue";
+import {ref, provide, onBeforeMount, onMounted, computed} from "vue";
 import CountdownTimer from "../components/CountdownTimer.vue";
 import ShowList from "../components/ShowList.vue";
 import HistoryGraph from "../components/HistoryGraph.vue";
@@ -27,7 +27,7 @@ provide("SHOWS", [showsSold, showsLoading])
 provide("HISTORY", [historySold, historyLoading])
 provide("EXTERNAL_ARTICLES", [externalArticles, externalArticlesLoading])
 onMounted(() => {
-  if([MAIN, HISTORY, ARTICLES].includes(route.hash)) {
+  if ([MAIN, HISTORY, ARTICLES].includes(route.hash)) {
     view.value = route.hash;
   }
   showsLoading.value = true
@@ -57,11 +57,25 @@ function setView(v) {
   view.value = v
 }
 
-onBeforeMount(() => {
-
+function refresh() {
   targetDate.value = getNextShowTime();
-  provide("TODAY", todayIs.value.getTime())
-  provide("NEXT_SHOW", targetDate.value)
+  todayIs.value = new Date()
+}
+
+const todayProvider = computed(() => {
+  const d = todayIs.value
+  //d.setDate(d.getDate() +1)
+  //d.setSeconds(d.getSeconds() + 2)
+  //d.setMinutes(d.getMinutes() + 68)
+  //d.setHours(d.getHours() + 14)
+  //console.log(d)
+  return d.getTime()
+})
+
+onBeforeMount(() => {
+  refresh()
+  provide("TODAY",  todayProvider)
+  provide("NEXT_SHOW", targetDate)
 })
 
 
@@ -72,7 +86,8 @@ const shows = {
   "2023-11-04T15:00:00": "Nästa Premiär 4 november",
   "2023-11-11T15:00:00": "Nästa Premiär 11 nobember",
   "2023-11-18T15:00:00": "Nästa Premiär 18 november",
-  "2023-11-25T15:00:00": "Sista Premiären 25 november",
+  "2023-11-25T15:00:00": "Nästa Premiär 25 november",
+  "2023-12-02T15:00:00": "Sista Premiären 2 december",
 }
 
 /**
@@ -91,14 +106,17 @@ function getNextShowTime() {
   for (const [date, v] of Object.entries(shows)) {
     const d = new Date(date).getTime()
     current = [d, v];
-    if (d >= todayIs.value.getTime()) {
+    if (d >= todayProvider.value + 1000) {
       return current
     }
   }
-  return current
+  return [-1, "Rock of Ages"]
 }
 
+function ticked() {
+    refresh()
 
+}
 
 </script>
 
@@ -108,8 +126,8 @@ function getNextShowTime() {
       <img :src="splash" alt="" class="absolute animate-pulse">
       <img :src="roa" alt="" class="absolute left-[50%] -translate-x-[50%]">
     </div>
-    <div class="flex flex-col gap-7 ">
-      <countdown-timer class="w-full" :key="targetDate"/>
+    <div class="flex flex-col gap-7 " :key="targetDate[0]">
+      <countdown-timer class="w-full"  @tick="ticked"/>
       <div class="flex m-auto  my-[-15px] z-10 md:gap-3 gap-1 flex-wrap">
         <tab-button :active="view ===MAIN" @click="setView(MAIN)">Idag</tab-button>
         <tab-button :active="view ===HISTORY" @click="setView(HISTORY)">Historik</tab-button>

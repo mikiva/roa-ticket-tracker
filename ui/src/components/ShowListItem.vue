@@ -34,7 +34,7 @@ const isPlayed = computed(() => {
   const start = show.startDate;
   const startDate = new Date(start).getTime();
 
-  return startDate <= todayIs
+  return startDate <= todayIs.value
 
 
 })
