@@ -1,2 +1,3 @@
 runmongo.sh
 mongo-init.js
+mongo-data*

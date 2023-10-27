@@ -192,6 +192,31 @@
             "date": "2022-11-26 ",
             "sold": 372
           }
+        },
+        {
+          "id": 189751,
+          "name": "Rock of Ages - En Rockmusikal",
+          "link": "https://www.nortic.se/ticket/show/189751",
+          "startDate": "2023-12-02 15:00",
+          "releaseDate": null,
+          "closeDate": "2023-12-02 15:00",
+          "playTimeInMinutes": 180,
+          "description": "",
+          "arenaId": 15830,
+          "arenaName": "Eskilstuna Teater",
+          "arenaCity": "Eskilstuna",
+          "arenaAddress": "",
+          "arenaPostcode": "",
+          "arenaLongitude": "0.0",
+          "arenaLatitude": "0.0",
+          "supply": "HIGH",
+          "minPrice": 190,
+          "maxPrice": 345,
+          "compare": {
+            "sold": 418,
+            "date": "2022-12-03",
+            "id": 164142
+          }
         }
       ]
     }

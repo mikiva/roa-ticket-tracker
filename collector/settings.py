@@ -16,7 +16,8 @@ class Settings(BaseSettings):
         189747,
         189748,
         189749,
-        189750
+        189750,
+        189751
     ]
 
     NORTIC_API_HOSTNAME: str = "https://www.nortic.se"
