@@ -1,0 +1,42 @@
+[
+    {
+      $addFields: {
+        createdDate: {
+          $dateToString: {
+            format: "%Y-%m-%d",
+            date: "$timestamp",
+          },
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          time: "$createdDate",
+          show_id: "$metadata.show_id",
+        },
+        minimum: {
+          $min: "$sold",
+        },
+        maximum: {
+          $max: "$sold",
+        },
+      },
+    },
+    {
+      $addFields: {
+        show: "$_id.show_id",
+        sold_today: {
+          $subtract: ["$maximum", "$minimum"],
+        },
+        minimum: "$minimum",
+        maximum: "$maximum",
+        date: "$_id.time",
+      },
+    },
+    {
+      $sort: {
+        _id: -1,
+      },
+    },
+  ]
